@@ -1,0 +1,62 @@
+用到的jar包：
+    dwr.jar
+    json-lib-2.1.jar
+        依赖--commons-lang.jar
+        ----commons-collections.jar
+        ----commons-beanutils.jar
+        ----ezmorph-1.0.6.jar
+
+
+用到的配置：
+    dwr.xml:
+        <!DOCTYPE dwr PUBLIC
+                "-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN"
+                "http://getahead.org/dwr/dwr30.dtd">
+
+        <dwr>
+            <allow>
+                <convert converter="bean" match="cn.pconline.activity.dwr.UserBean"/>
+                <create creator="new" javascript="handler">
+                    <param name="class" value="cn.pconline.activity.dwr.Handler"/>
+                </create>
+            </allow>
+        </dwr>
+    web.xml:
+        配置dwr核心DwrServlet
+        <servlet>
+                <servlet-name>dwr-invoker</servlet-name>
+                <servlet-class>
+                    org.directwebremoting.servlet.DwrServlet
+                </servlet-class>
+                <init-param>
+                    <description>调试DWR,发布系统时应将其设为false</description>
+                    <param-name>debug</param-name>
+                    <param-value>true</param-value>
+                </init-param>
+                <init-param>
+                    <description>使用服务器推技术(反转AJAX)</description>
+                    <param-name>activeReverseAjaxEnabled</param-name>
+                    <param-value>true</param-value>
+                </init-param>
+                <init-param>
+                    <param-name>
+                        initApplicationScopeCreatorsAtStartup
+                    </param-name>
+                    <param-value>true</param-value>
+                </init-param>
+                <init-param>
+                    <param-name>maxWaitAfterWrite</param-name>
+                    <param-value>100</param-value>
+                </init-param>
+                <load-on-startup>4</load-on-startup>
+            </servlet>
+            <servlet-mapping>
+                <servlet-name>dwr-invoker</servlet-name>
+                <url-pattern>/dwr/*</url-pattern>
+            </servlet-mapping>
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+<!DOCTYPE dwr PUBLIC
+        "-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN"
+        "http://getahead.org/dwr/dwr30.dtd">
+<dwr>
+<allow>
+    <convert converter="bean" match="cn.pconline.chatroom.UserBean"/>
+    <create creator="new" javascript="handler">
+        <param name="class" value="cn.pconline.chatroom.Handler"/>
+    </create>
+</allow>
+</dwr>
